@@ -47,9 +47,23 @@ export default function TextForm(props) {
             }
         }
     
-    const copy=()=>{
-       navigator.clipboard.writeText(text);
-    }
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+        const copy = () => {
+          if (!isMobile) {
+            // Perform the copy operation for non-mobile devices
+            navigator.clipboard.writeText(text)
+              .then(() => {
+                // Handle success
+              })
+              .catch((error) => {
+                // Handle the error
+              });
+          } else {
+            // Provide a message or take alternative actions for mobile devices
+            return "oops"
+          }
+        }
     const [text , changeText]=useState("Enter here");
     const [st , changest]=useState("lower");
   return (
